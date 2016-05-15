@@ -9,9 +9,9 @@ var SearchBar = React.createClass({
 
   getInitialState: function() {
     return {
-      street: "51 Prospect Rd",
-      city: "Piedmont",
-      state: "CA"
+      street: "",
+      city: "",
+      state: ""
     };
   },
 
@@ -31,13 +31,11 @@ var SearchBar = React.createClass({
                   unitSystem: google.maps.UnitSystem.METRIC
         };
         directionsService.route(directionsRequest, function (response, status){
+          console.log(locations);
           if (status == google.maps.DirectionsStatus.OK){
             var directions = response.routes[0].legs[0].steps;
-
             DirectionActions.sendDirections(directions);
-            //put in directions store
           } else {
-            debugger;
             //put error message in directions store
           }
         });
@@ -45,38 +43,24 @@ var SearchBar = React.createClass({
       }
     })
 
-
-  //
-
-  //   directionsService.route(directionsRequest, function (response, status) {
-  //     if (status == google.maps.DirectionsStatus.OK) {
-  //       var directions = response.routes[0].legs[0].steps;
-  //       var firstDirection = directions[0].instructions.split(" ").slice(0, 2);
-  //       firstDirection.push("for " + directions[0].distance.text);
-  //       firstDirection[1] = firstDirection[1].slice(3, firstDirection[1].length - 4);
-  //       var startInstruction = <li>{firstDirection.join(" ")}</li>;
-  //       var allDirections = response.routes[0].legs[0].steps.slice(1).map(function(step) {
-  //         var maneuver = step.maneuver.split("-").join(" ");
-  //         return (<li>{maneuver[0].toUpperCase() + maneuver.slice(1) + " for " + step.distance.text}</li>);
-  //       });
-  //       allDirections.unshift(startInstruction);
-  //     }
   },
 
   render: function() {
     return (
-      <div>
-        <h3 id='slogan' >Enter your location</h3>
-          <form className='searchbar' onSubmit={this.handleSubmit}>
-            <label id='street' >Street Address: <input type='text' valueLink={this.linkState('street')}/>
-            </label>
-            <br></br>
-            <label id='city' >City: <input type='text' valueLink={this.linkState('city')}/>
-            </label>
-            <br></br>
-            <label id='state' >State: <input type='text' valueLink={this.linkState('state')}/>
-            </label>
-            <br></br>
+      <div className="searchbar-container">
+        <h3 id='slogan' >Serentripity</h3>
+          <form className='searchbar-form' onSubmit={this.handleSubmit}>
+            <div id='label_div'>
+              <label id='street' >Street: <input type='text' valueLink={this.linkState('street')}/>
+              </label>
+              <br></br>
+              <label id='city' >City: <input type='text' valueLink={this.linkState('city')}/>
+              </label>
+              <br></br>
+              <label id='state' >State: <input type='text' valueLink={this.linkState('state')}/>
+              </label>
+            </div>
+
             <input id="searchButton" className='account' type='submit' value='Go!'/>
           </form>
       </div>

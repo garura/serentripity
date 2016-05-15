@@ -41,26 +41,27 @@ var Directions = React.createClass({
         return (<li>{maneuver + " for " + step.distance.text}</li>);
       });
       allDirections.unshift(startInstruction);
-      return allDirections;
+      return <ul className="directions-list">{allDirections}</ul>;
     }
     else {
-      return (<li>Enter your location to discover your fate</li>);
+      return (<h1 id='embark'>Enter your location to discover your fate</h1>);
     }
   },
 
   render: function() {
     var directions = this.generateSteps();
     var message;
-    if (directions.length) {
-      message = "Good luck.";
+    debugger;
+    if (directions.type !== "h1") {
+      message = <h1 id='good_luck'>Good luck.</h1>;
     }
     else {
-      message = "Where will you end up?";
+      message = <h1 id='where'>Where will you end up...?</h1>;
     }
     return (
-      <div>
-        <ul>{directions}</ul>
-        <h1>{message}</h1>
+      <div className="directions-container">
+        {directions}
+        {message}
       </div>
     )
 
