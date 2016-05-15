@@ -61,7 +61,7 @@ var SearchBar = React.createClass({
               </label>
             </div>
 
-            <input id="searchButton" className='account' type='submit' value='Go!'/>
+            <input id="searchButton" className='account' type='submit' value='Explore!'/>
           </form>
       </div>
     );

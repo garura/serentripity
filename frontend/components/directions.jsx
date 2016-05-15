@@ -51,7 +51,6 @@ var Directions = React.createClass({
   render: function() {
     var directions = this.generateSteps();
     var message;
-    debugger;
     if (directions.type !== "h1") {
       message = <h1 id='good_luck'>Good luck.</h1>;
     }
